@@ -5,10 +5,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_USER=tanner
-      - MYSQL_PASSWORD=Tanner123
-      - MYSQL_DATABASE=team-member-project
-      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PWD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
       - mysql-data:/var/lib/mysql
     container_name: mysql
@@ -18,10 +18,22 @@ services:
     ports:
       - "8085:80"
     environment:
-      - PMA_HOST=mysql
-      - PMA_PORT=3306
-      - MYSQL_ROOT_PASSWORD=rootpass
+      - PMA_HOST=${PMA_HOST}
+      - PMA_PORT=${PMA_PORT}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     container_name: phpmyadmin
+    depends_on:
+      - mysql
+  java-app:
+    image: 164.92.76.102:8086/java-app:1.0-snapshot
+    ports:
+      - 8080:8080
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PWD=${DB_PWD}
+      - DB_NAME=${DB_NAME}
+      - DB_SERVER=${DB_SERVER}
+    container_name: java-app
     depends_on:
       - mysql
 volumes:
