@@ -1,0 +1,26 @@
+version: '3'
+services:
+  mysql:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - DB_USER=tanner
+      - DB_PWD=Tanner123
+      - DB_SERVER=localhost
+      - DB_NAME=team-member-project
+    volumes:
+      - mysql-data:/var/lib/mysql
+    container_name: mysql
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "8085:80"
+    environment:
+      - PMA_HOST=mysql
+    container_name: phpmyadmin
+    depends_on:
+      - mysql
+volumes:
+  mysql-data:
+    driver: local
