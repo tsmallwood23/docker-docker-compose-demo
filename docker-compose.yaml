@@ -27,15 +27,16 @@ services:
   java-app:
     image: 164.92.76.102:8086/java-app:1.0-snapshot
     ports:
-      - 8080:8080
+      - "8080:8080"
     environment:
       - DB_USER=${DB_USER}
       - DB_PWD=${DB_PWD}
-      - DB_NAME=${DB_NAME}
       - DB_SERVER=${DB_SERVER}
+      - DB_NAME=${DB_NAME}
     container_name: java-app
     depends_on:
       - mysql
+      - phpmyadmin
 volumes:
   mysql-data:
     driver: local
