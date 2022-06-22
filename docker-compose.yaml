@@ -5,10 +5,9 @@ services:
     ports:
       - "3306:3306"
     environment:
-      - DB_USER=tanner
-      - DB_PWD=Tanner123
-      - DB_SERVER=localhost
-      - DB_NAME=team-member-project
+      - MYSQL_USER=tanner
+      - MYSQL_PASSWORD=Tanner123
+      - MYSQL_DATABASE=team-member-project
       - MYSQL_ROOT_PASSWORD=rootpass
     volumes:
       - mysql-data:/var/lib/mysql
